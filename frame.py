@@ -58,7 +58,6 @@ for item in items:
 files = []
 for filename in os.listdir('./tmp'):
     files.append('tmp/' + filename)
-files.remove('tmp/.DS_Store')
 
 win = tkinter.Tk()
 win.attributes("-fullscreen", True)
@@ -69,12 +68,12 @@ files = [Image.open(x).resize((w, h), Image.ANTIALIAS) for x in files]
 photos = [ImageTk.PhotoImage(x) for x in files]
 label = tkinter.Label()
 label.photos = photos
-label.counter = 0
+counter = 0
 
 def next_pic():
-    label['image'] = label.photos[label.counter%len(label.photos)]
+    label['image'] = label.photos[counter%len(label.photos)]
     label.after(2500, next_pic)
-    label.counter += 1
+    counter += 1
 label.pack()
 next_pic()
 win.mainloop()
